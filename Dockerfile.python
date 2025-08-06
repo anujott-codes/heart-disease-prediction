@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install required packages
+RUN pip install flask pandas numpy scikit-learn joblib
+
+# Copy your model files
+COPY log_reg.pkl .
+COPY scaler.pkl .
+COPY columns.pkl .
+COPY scripts/model_integration.py .
+
+EXPOSE 5000
+
+CMD ["python", "model_integration.py"]
